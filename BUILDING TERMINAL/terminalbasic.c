@@ -180,7 +180,7 @@ int main() {
             cmdCounter++;//counting the commands
         }
 
-        if (strcmp(str, "done") == 0) {// if the input equals done then stop then exit the program with the following results
+        if (strstr(str, "done")) {// if the input contains done then stop then exit the program with the following results
             double average = charCounter_original / cmdCounter;
 
             printf("Number of commands : %d\n", cmdCounter);
