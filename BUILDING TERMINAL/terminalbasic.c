@@ -181,7 +181,7 @@ int main() {
 
 
         if (strstr(str, "done")) {// if the input contains done then stop then exit the program with the following results
-            double average = charCounter_original / cmdCounter;
+        double average = (double)charCounter_original / (double ) cmdCounter;
 
             printf("Number of commands : %d\n", cmdCounter);
             printf("total length of all commands : %d \n ", charCounter_original);
