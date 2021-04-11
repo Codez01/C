@@ -135,13 +135,14 @@ void commands(char *args[]) {// executes the given commands within the array arg
         if (strcmp(args[0], "cd") == 0) {// if the command was cd
 
             printf("Command not supported (Yet) \n");
+            exit(1);
 
         } else {
 
 
             chdir(path_original);
             execvp(args[0], args);//execute command
-            fprintf(stdout, "There's no such a command\n");// if execvp failed
+            fprintf(stderr, "There's no such a command\n");// if execvp failed
             exit(1);//exit
 
 
@@ -158,8 +159,9 @@ void commands(char *args[]) {// executes the given commands within the array arg
         f[1] = fork();
         if(f[1]==0){
             if (strcmp(args[0], "cd") == 0) {// if the command was cd
+                exit(1);
 
-                }
+            }
             else {
 
                 char *path;
@@ -190,7 +192,7 @@ void commands(char *args[]) {// executes the given commands within the array arg
 
 
                 execvp(sched[0], sched);//execute command
-                fprintf(stdout, "Cannot show its schedule \n");// if execvp failed
+                fprintf(stderr, "Cannot show its schedule \n");// if execvp failed
                 exit(1);//exit
 
 
@@ -202,7 +204,7 @@ void commands(char *args[]) {// executes the given commands within the array arg
 
         }
         int status;
-        for(int i=0; i<2; i++) {
+        for(int i=0; i<2; i++) {//waiting for the two forks
             waitpid(f[i], &status, 0);
         }
 
@@ -216,6 +218,7 @@ void commands(char *args[]) {// executes the given commands within the array arg
 
     } else {// if fork has failed
         perror("Error while calling the fork function");
+        exit(1);
 
     }
 }
@@ -238,7 +241,7 @@ int main() {
 
 
 
-       prompt();
+        prompt();
         str = (char *) malloc(512 * sizeof(char));//allocating memory
         if (str == NULL) {
             exit(1); //if any error has occured
@@ -250,13 +253,12 @@ int main() {
 
         str[strlen(str) - 1] = '\0';//gets the input without the enter input
 
-        if (str[0] != '\0') //string isn't empty!
-        {
-            cmdCounter++;//counting the commands
-        }
+
+        cmdCounter++;//counting the commands
+
 
         if (strstr(str, "done")) {// if the input contains done then stop then exit the program with the following results {// if the input equals done then stop then exit the program with the following results
-            double average = charCounter_original / cmdCounter;
+            double average = (double)charCounter_original / (double ) cmdCounter;
 
             printf("Number of commands : %d\n", cmdCounter);
             printf("total length of all commands : %d \n ", charCounter_original);
