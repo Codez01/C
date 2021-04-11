@@ -132,6 +132,7 @@ void commands(char *args[]) {// executes the given commands within the array arg
 
         if (strcmp(args[0], "cd") == 0) {// if the command was cd
             printf("Command not supported (Yet) \n");
+            exit(1);
 
         } else {
 
@@ -175,10 +176,9 @@ int main() {
 
         str[strlen(str) - 1] = '\0';//gets the input without the enter input
 
-        if (str[0] != '\0') //string isn't empty!
-        {
+            
             cmdCounter++;//counting the commands
-        }
+
 
         if (strstr(str, "done")) {// if the input contains done then stop then exit the program with the following results
             double average = charCounter_original / cmdCounter;
